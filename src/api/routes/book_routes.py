@@ -28,10 +28,10 @@ def get_book_id(book_id):
 def create_book():
     data = request.get_json()
 
-    if not data.get('title') or not data.get('cover') or not data.get('description') or not data.get('author_name'):
+    if not data.get('title') or not data.get('cover') or not data.get('description') or not data.get('author'):
         return jsonify({'msg': 'Rellena todos los campos atontao'}), 404
     
-    author = Author.query.filter_by(name=data['author_name']).first()
+    author = Author.query.filter_by(name=data['author']).first()
 
     if not author:
         return jsonify({'msg': 'Autor no encontrado'}), 404

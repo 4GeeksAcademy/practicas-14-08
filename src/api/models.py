@@ -67,6 +67,7 @@ class Book(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "author_id": self.author_id,
             "title": self.title,
             "cover": self.cover,
             "description": self.description,

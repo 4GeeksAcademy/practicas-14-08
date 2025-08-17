@@ -26,10 +26,15 @@ def show_user(user_id):
 
 @user_bp.route('/', methods=['POST'])
 def create_user():
+    users = db.session.query(User).all()
     data = request.get_json()
 
     if not data.get('email') or not data.get('password'):
         return jsonify({'msg': 'Rellena todos los datos atontao'}), 400
+    
+    for u in users:
+        if u.email == data.get('email'):
+            return jsonify({'error': 'Usuario ya existe'}), 409
     
     new_user = User(
         email= data['email'],
@@ -38,7 +43,7 @@ def create_user():
 
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({'msg': 'Usuario creado'}, new_user.serialize()), 200
+    return jsonify({'msg': 'Usuario creado', 'user': new_user.serialize()}), 200
 
 @user_bp.route('/<int:user_id>', methods=['PUT'])
 def update_user(user_id):

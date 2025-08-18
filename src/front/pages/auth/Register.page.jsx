@@ -16,7 +16,6 @@ export const Register = () => {
     } else {
       setError(null);
     }
-
     const responseApi = await createUser({
       email: input.email,
       password: input.password,
@@ -46,7 +45,7 @@ export const Register = () => {
   return (
     <form
       onSubmit={handleOnSubmit}
-      className="container bg-secondary mt-5 rounded"
+      className="container bg-secondary mt-5 rounded w-50"
     >
       <div className="mb-3">
         <h2 className="text-center p-2 fw-bold">Formulario de registro</h2>

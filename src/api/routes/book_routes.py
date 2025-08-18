@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import CORS
 from ..models import Book, db, Author
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 book_bp = Blueprint('book', __name__, url_prefix='/book')
 

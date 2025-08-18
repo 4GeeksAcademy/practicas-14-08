@@ -2,10 +2,11 @@ import { useState } from "react";
 import { createUser } from "../../service/service.api";
 import { useNavigate } from "react-router-dom";
 
+
 export const Register = () => {
   const [input, setInput] = useState({});
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -20,14 +21,13 @@ export const Register = () => {
       email: input.email,
       password: input.password,
     });
-    if (!responseApi.success && responseApi.error || responseApi.msg) {
-        setError(responseApi.error || responseApi.msg)
+    if ((!responseApi.success && responseApi.error) || responseApi.msg) {
+      setError(responseApi.error || responseApi.msg);
     }
     if (responseApi.success) {
-        return navigate('/login')
+      return navigate("/login");
     }
   };
-
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

@@ -64,9 +64,9 @@ class Author(db.Model):
 class Book(db.Model):
     __tablename__ = 'books'
     id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(String(120), nullable=False)
-    cover: Mapped[str] = mapped_column(String(120), nullable=False)
-    description: Mapped[str] = mapped_column(String(120), nullable=False)
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
+    cover: Mapped[str] = mapped_column(String(255), nullable=False)
+    description: Mapped[str] = mapped_column(String(255), nullable=False)
 
     author_id: Mapped[int] = mapped_column(ForeignKey('authors.id'))
     author: Mapped['Author'] = relationship(back_populates='books')

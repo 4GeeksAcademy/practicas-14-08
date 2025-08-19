@@ -25,7 +25,7 @@ export const Login = () => {
       return 
     }
     localStorage.setItem('token', responseLogin.token)
-    navigate('/admin/profile')
+    navigate('/')
   }
 
 

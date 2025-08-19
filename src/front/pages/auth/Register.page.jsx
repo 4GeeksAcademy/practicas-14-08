@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createUser } from "../../service/service.api";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import style from '../../styles/register.module.css'
 
 export const Register = () => {
   const [input, setInput] = useState({});
@@ -21,12 +21,14 @@ export const Register = () => {
       email: input.email,
       password: input.password,
     });
+    localStorage.setItem('token', responseApi.token)
     if ((!responseApi.success && responseApi.error) || responseApi.msg) {
       setError(responseApi.error || responseApi.msg);
     }
     if (responseApi.success) {
-      return navigate("/login");
+      return navigate("/admin/profile");
     }
+    
   };
 
   const handleOnChange = (e) => {
@@ -43,61 +45,46 @@ export const Register = () => {
   };
 
   return (
-    <form
-      onSubmit={handleOnSubmit}
-      className="container bg-secondary mt-5 rounded w-50"
-    >
-      <div className="mb-3">
-        <h2 className="text-center p-2 fw-bold">Formulario de registro</h2>
-        <label htmlFor="email" className="form-label text-white fw-bold">
-          Email
-        </label>
+    <form onSubmit={handleOnSubmit} className={`${style.form} mx-auto mt-5`}>
+      <p className={style.title}>Registrate </p>
+      <p className={style.message}>Registrate y empieza a disfrutar de nuestra app. </p>
+      <label>
         <input
-          type="email"
-          className="form-control"
-          name="email"
-          aria-describedby="emailHelp"
-          onChange={(e) => handleOnChange(e)}
-          required
+        required
+        placeholder=''
+        type="email"
+        className={style.input}
+        name="email"
+        onChange={(e) => handleOnChange(e)}
         />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label text-white fw-bold">
-          Contraseña
-        </label>
+        <span>Email</span>
+      </label>
+      <label>
         <input
-          type="password"
-          className="form-control"
-          name="password"
-          onChange={(e) => handleOnChange(e)}
-          required
+        required
+        placeholder=''
+        type="password"
+        className={style.input}
+        name="password"
+        onChange={(e) => handleOnChange(e)}
         />
-      </div>
-      <div className="mb-3">
-        <label
-          htmlFor="confirmPassword"
-          className="form-label text-white fw-bold"
-        >
-          Confirmar contraseña
-        </label>
+        <span>Contraseña</span>
+      </label>
+      <label>
         <input
-          type="password"
-          className="form-control"
-          name="confirmPassword"
-          onChange={(e) => handleOnChange(e)}
-          required
+        required
+        placeholder=''
+        type="password"
+        className={style.input}
+        name="confirmPassword"
+        onChange={(e) => handleOnChange(e)}
         />
-      </div>
-      {error && (
-        <div className="alert alert-danger text-center" role="alert">
-          {error}
-        </div>
-      )}
-      <div className="text-center">
-        <button type="submit" className="btn btn-primary mb-3 w-50 fw-bold">
-          Regsitrarse
-        </button>
-      </div>
+        <span>Confirmar contraseña</span>
+      </label>
+      <button className={style.submit}>Enviar</button>
+      <p className={style.signin}>
+        Ya tienes cuenta ? <Link to={'/login'}><span>Iniciar sesión</span>{" "}</Link>
+      </p>
     </form>
   );
 };

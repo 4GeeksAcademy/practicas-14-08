@@ -8,7 +8,7 @@ fav_bp = Blueprint('fav_books', __name__, url_prefix='/favorites')
 CORS(fav_bp)
 
 @fav_bp.route('/', methods=['GET'])
-@jwt_required
+@jwt_required()
 def get_favs():
     user_id = get_jwt_identity()
     user = User.query.get(int(user_id))
@@ -25,7 +25,7 @@ def get_favs():
                     'authors': fav_author}), 200
 
 @fav_bp.route('/books/<int:book_id>', methods =['POST'])
-@jwt_required
+@jwt_required()
 def add_book(book_id):
     user_id = get_jwt_identity()
     user = db.session.get(User, int(user_id))
@@ -43,7 +43,7 @@ def add_book(book_id):
 
 
 @fav_bp.route('/books/<int:book_id>', methods =['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_book(user_id, book_id):
     user_id = get_jwt_identity()
     user = db.session.get(User, int(user_id))
@@ -61,7 +61,7 @@ def delete_book(user_id, book_id):
 
 
 @fav_bp.route('/author/<int:author_id>', methods =['POST'])
-@jwt_required
+@jwt_required()
 def add_author(author_id):
     user_id = get_jwt_identity()
     user = db.session.get(User, int(user_id))
@@ -78,7 +78,7 @@ def add_author(author_id):
     return jsonify({'msg': 'El autor ha sido añadido a favoritos'}), 201
 
 @fav_bp.route('/author/<int:author_id>', methods =['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_author(author_id):
     user_id = get_jwt_identity()
     user = db.session.get(User, int(user_id))

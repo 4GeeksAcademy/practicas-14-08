@@ -7,7 +7,7 @@ user_bp = Blueprint('users', __name__, url_prefix='/users')
 
 CORS(user_bp)
 
-@user_bp.route('/signup', methods=['POST'])
+@user_bp.route('/', methods=['POST'])
 def sign_up():
     data = request.get_json()
     email = data.get('email')
@@ -27,8 +27,9 @@ def sign_up():
     new_user.set_password(data['password'])
     db.session.add(new_user)
     db.session.commit()
+    token = create_access_token(str(new_user.id))
 
-    return jsonify({'message': 'Usuario creado'}), 200
+    return jsonify({'message': 'Usuario creado', 'token': token}), 200
 
 @user_bp.route('/login', methods=['POST'])
 def login():
@@ -54,7 +55,7 @@ def login():
     
 
 @user_bp.route('/', methods=['GET'])
-@jwt_required
+@jwt_required()
 def get_users():
     users = User.query.all()
 
@@ -64,8 +65,8 @@ def get_users():
     return jsonify([u.serialize() for u in users]), 200
 
 
-@user_bp.route('/', methods=['GET'])
-@jwt_required
+@user_bp.route('/profile', methods=['GET'])
+@jwt_required()
 def show_user():
     user_id = get_jwt_identity()
     user = User.query.get(int(user_id))
@@ -73,10 +74,11 @@ def show_user():
     if not user:
         return jsonify({'msg': 'No hay ningun usuario con esa referencia'}), 404
 
-    return jsonify(user.serialize())
+    return jsonify(user.serialize()), 200
 
 
 @user_bp.route('/<int:user_id>', methods=['PUT'])
+@jwt_required()
 def update_user(user_id):
     user = db.session.get(User, user_id)
     data = request.get_json()
@@ -92,7 +94,7 @@ def update_user(user_id):
     return jsonify({'msg': 'Usuario modificado'}, user.serialize()), 200
         
 @user_bp.route('/', methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_user():
     user_id = get_jwt_identity()
     user = db.session.get(User, int(user_id))

@@ -1,28 +1,43 @@
-import { Link } from "react-router-dom";
-import "../../styles/login.styles.css";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import style from '../../styles/login.module.css'
 import { useState } from "react";
+import { login } from "../../service/service.api";
 
 export const Login = () => {
   const [input, setInput] = useState({});
+  const navigate = useNavigate()
+
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     const updateUser = { ...input, [name]: value };
     setInput(updateUser);
 
-    console.log(updateUser);
-    
-  
   };
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault()
+
+    const responseLogin = await login(input.email, input.password);
+
+    if (!responseLogin.success) {
+      alert('Usuario o contraseña inavlido')
+      return 
+    }
+    localStorage.setItem('token', responseLogin.token)
+    navigate('/admin/profile')
+  }
+
+
 
   return (
     <>
-      <form className="form mx-auto mt-5" >
+      <form onSubmit={handleOnSubmit} className={`${style.form} mx-auto mt-5`} >
         <h3 className="text-center">Iniciar sesión</h3>
-        <div className="flex-column mt-3">
+        <div className={`${style['flex-column']} mt-3`}>
           <label>Email </label>
         </div>
-        <div className="inputForm">
+        <div className={style.inputForm}>
           <svg
             height={20}
             viewBox="0 0 32 32"
@@ -35,16 +50,16 @@ export const Login = () => {
           </svg>
           <input
           type="text" 
-          className="input" 
+          className={style.input} 
           placeholder="Introduce el email" 
           name="email"
           onChange={(e) => handleOnChange(e)}
           />
         </div>
-        <div className="flex-column">
+        <div className={style['flex-column']}>
           <label>Contraseña </label>
         </div>
-        <div className="inputForm">
+        <div className={style.inputForm}>
           <svg
             height={20}
             viewBox="-64 0 512 512"
@@ -56,7 +71,7 @@ export const Login = () => {
           </svg>
           <input
             type="password"
-            className="input"
+            className={style.input}
             placeholder="Introduce la contraseña"
             name="password"
             onChange={(e) => handleOnChange(e)}
@@ -69,20 +84,20 @@ export const Login = () => {
             <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
           </svg>
         </div>
-        <div className="flex-row">
+        <div className={style['flex-row']}>
           <div>
             <input type="checkbox" />
             <label>Recordarme </label>
           </div>
-          <span className="span">Contraseña olvidada?</span>
+          <span className={style.span}>Contraseña olvidada?</span>
         </div>
-        <button className="button-submit">Entrar</button>
-        <p className="p">
-          No tienes cuenta? <Link to={'/register'}><span className="span">Registrate</span></Link>
+        <button className={style['button-submit']}>Entrar</button>
+        <p className={style.p}>
+          No tienes cuenta? <Link to={'/register'}><span className={style.span}>Registrate</span></Link>
         </p>
-        <p className="p line">O con</p>
-        <div className="flex-row">
-          <button className="btn1 google">
+        <p className={`${style.p} ${style.line}`}>O con</p>
+        <div className={style['flex-row']}>
+          <button className={`${style.btn1} google`}>
             <svg
               version="1.1"
               width={20}
@@ -122,7 +137,7 @@ export const Login = () => {
             </svg>
             Google
           </button>
-          <button className="btn1 apple">
+          <button className={`${style.btn1} apple`}>
             <svg
               version="1.1"
               height={20}

@@ -1,5 +1,8 @@
+import React from 'react'
+
 export const Profile = () => {
-    return (
-        <h1>Hola profile</h1>
-    )
+  return (
+    <h1 className='text-white'>Profile</h1>
+  )
 }
+

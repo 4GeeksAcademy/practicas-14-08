@@ -1,7 +1,11 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
+
 export const Home = () => {
+
+
   return (
     <>
       <h1 className="text-center text-white mt-5">Bienvenido </h1>

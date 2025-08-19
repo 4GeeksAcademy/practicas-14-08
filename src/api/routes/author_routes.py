@@ -3,6 +3,7 @@ from flask_cors import CORS
 from ..models import db, Author
 
 author_bp = Blueprint('author', __name__, url_prefix='/author')
+CORS(author_bp)
 
 
 @author_bp.route('/', methods= ['GET'])

@@ -3,7 +3,7 @@
 export const Home = () => {
   
   const bookExtract = ()=>{
-    const data = 
+    
   }
 
 

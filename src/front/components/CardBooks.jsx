@@ -7,7 +7,7 @@ export const CardBooks = ( {book} ) => {
 
 
   return (
-    <div className="card" style={{ width: "15rem", margin: 10 }}>
+    <div className="card" style={{ width: "15rem", margin: 15 }}>
       <img
         src={book.cover}
         className="card-img-top"

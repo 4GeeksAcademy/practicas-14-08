@@ -57,7 +57,7 @@ class Author(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            'books': [b.serialize() for b in self.books]
+            'books': [b.title for b in self.books]
         }
     
 

@@ -4,8 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 export const Navbar = () => {
   const token = localStorage.getItem("token");
   const [isToken, setIsToken] = useState(false);
-  const location = useLocation()
-  
+  const location = useLocation();
+
   useEffect(() => {
     if (token) {
       setIsToken(true);
@@ -16,7 +16,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <span className="navbar-brand" href="#">
-          Navbar
+          Libreria Manolete
         </span>
         <button
           className="navbar-toggler"
@@ -32,13 +32,51 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link><span className="nav-link active" aria-current="page" href="#">
-                Inicio
-              </span></Link>
+              <Link>
+                <span className="nav-link active" aria-current="page" href="#">
+                  Inicio
+                </span>
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Menu
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link to={"/book"}>
+                    <a className="dropdown-item" href="#">
+                      Libros
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/author"}></Link>
+                  <a className="dropdown-item" href="#">
+                    Autores
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link to={"/"}>
+                    <a className="dropdown-item" href="#">
+                      Inicio
+                    </a>
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
 
-          {!isToken ?
+          {!isToken ? (
             <div className="d-flex gap-2">
               <Link to={"/register"}>
                 <button className="btn btn-success text-dark fw-bold">
@@ -51,25 +89,24 @@ export const Navbar = () => {
                 </button>
               </Link>
             </div>
-           : 
+          ) : (
             <div className="d-flex gap-2">
-              
-                <button
-                  className="btn btn-success text-dark fw-bold"
-                  onClick={() =>
-                    localStorage.removeItem("token", setIsToken(false))
-                  }
-                >
-                  Cerrar sesion
-                </button>
-              
+              <button
+                className="btn btn-success text-dark fw-bold"
+                onClick={() =>
+                  localStorage.removeItem("token", setIsToken(false))
+                }
+              >
+                Cerrar sesion
+              </button>
+
               <Link to={"/admin/profile"}>
                 <button className="btn btn-primary text-dark fw-bold">
                   Perfil
                 </button>
               </Link>
             </div>
-          }
+          )}
         </div>
       </div>
     </nav>

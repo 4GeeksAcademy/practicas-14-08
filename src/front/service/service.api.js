@@ -179,3 +179,14 @@ export const getBooks = async () => {
     return {error: error.msg}
   }
 };
+
+export const getAuthors = async () => {
+  try {
+    const response = await fetch(`${urlApi}/api/author/`)
+    const data = response.json()
+
+    return data
+  } catch (error) {
+    return {error: error.msg}
+  }
+}

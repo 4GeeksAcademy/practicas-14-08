@@ -13,6 +13,8 @@ import { Home } from "./pages/public/Home.page";
 import { Profile } from "./pages/admin/Profile.page";
 import { Login } from "./pages/auth/Login.page";
 import { Register } from "./pages/auth/Register.page";
+import { BooksList } from "./pages/public/BooksList.page";
+import { AuthorsList } from "./pages/public/AuthorsList.page";
 
 
 export const router = createBrowserRouter(
@@ -20,6 +22,8 @@ export const router = createBrowserRouter(
     <Route element={ <RootLayout/> }>
       <Route element={ <PublicLayout/> }>
         <Route index element={ <Home/> }/>
+        <Route path="book" element={ <BooksList/> }/>
+        <Route path="author" element={ <AuthorsList/> }/>
       </Route>
 
       <Route path="admin" element={ <AdminLayout/> }>

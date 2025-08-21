@@ -1,0 +1,114 @@
+.bookCard {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.bookCoverContainer {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px 16px 0 0; /* Esquinas superiores redondeadas */
+}
+
+.bookCover {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center; 
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.bookCard:hover .bookCover {
+  transform: scale(1.05);
+}
+
+.bookBody {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  overflow: hidden;
+}
+
+.bookAuthor {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bookDescription {
+  color: #4a5568;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.bookActions {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #f1f3f4;
+}
+
+.btnPrimaryCustom {
+  background: linear-gradient(135deg, #98a7ec 0%, #110e13 100%);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.btnPrimaryCustom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btnFavorite {
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  color: #a0aec0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btnFavorite:hover {
+  background: #fed7d7;
+  border-color: #fc8181;
+  color: #e53e3e;
+  transform: scale(1.1);
+}
+

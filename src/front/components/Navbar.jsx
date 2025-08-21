@@ -57,10 +57,11 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={"/author"}></Link>
-                  <a className="dropdown-item" href="#">
-                    Autores
-                  </a>
+                  <Link to={"/author"}>
+                    <a className="dropdown-item" href="#">
+                      Autores
+                    </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />

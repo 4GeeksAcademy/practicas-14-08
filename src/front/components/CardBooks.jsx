@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/books.module.css";
+import { createBooksFavs, getBooksFavorites } from "../service/service.api";
 
 export const CardBooks = ({ book }) => {
+
+   const [inFavorite, setInFavorite] = useState(false)
+
+   const handleInFavorite = () => {
+    if (store.favorites.books.includes(book.id)) {
+      setInFavorite(true)
+    }
+  }
+
+
   return (
     <>
       <div className="col-md-4 my-4 mx-2">
@@ -33,7 +44,7 @@ export const CardBooks = ({ book }) => {
                   <i className="fas fa-eye me-1"></i>
                   Ver más
                 </button>
-                <button className={styles.btnFavorite}>❤️</button>
+                <button className={styles.btnFavorite} onClick={()=> createBooksFavs(book.id)}>❤️</button>
               </div>
             </div>
           </div>

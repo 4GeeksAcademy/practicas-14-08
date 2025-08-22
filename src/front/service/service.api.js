@@ -190,3 +190,58 @@ export const getAuthors = async () => {
     return {error: error.msg}
   }
 }
+
+export const createBooksFavs = async (book_id) => {
+  try {
+    const response = await fetch(`${urlApi}/api/favorites/books/${book_id}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    if (!response.ok) {
+      return {
+        success: false,
+        error: data.error || data.msg || "Error desconocido",
+        status: response.status,
+      }
+    }
+    return {
+      success: true
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message
+    }
+  }
+}
+
+export const getBooksFavorites = async () => {
+  try {
+    const response = await fetch(`${urlApi}/api/favorites/`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+      
+    })
+    if (!response.ok) {
+      return {
+        success: false,
+        error: data.error || data.msg || "Error desconocido",
+        status: response.status,
+      }
+    }
+    const data = await response.json()
+
+    return {
+      success: true,
+      favorites: data
+    }
+  } catch (error) {
+    return {error: error.message}
+  }
+}

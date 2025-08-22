@@ -43,15 +43,8 @@ export const Home = () => {
                   Ver Autores
                 </button>
               </Link>
-              <Link to={"/login"}>
-                <button className="btn btn-info btn-lg">
-                  <i className="fas fa-plus-circle me-2"></i>
-                  Iniciar sesión
-                </button>
-              </Link>
             </div>
           </div>
-          {/* Footer */}
           <p className="text-white-50 mt-4 mb-0">
             <small>Sistema de gestión bibliotecaria</small>
           </p>

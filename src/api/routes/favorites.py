@@ -44,7 +44,7 @@ def add_book(book_id):
 
 @fav_bp.route('/books/<int:book_id>', methods =['DELETE'])
 @jwt_required()
-def delete_book(user_id, book_id):
+def delete_book( book_id):
     user_id = get_jwt_identity()
     user = db.session.get(User, int(user_id))
     book = Book.query.get(book_id)

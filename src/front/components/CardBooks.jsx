@@ -9,15 +9,16 @@ export const CardBooks = ({ book }) => {
    const { store } = useGlobalReducer()
 
    const handleInFavorite = async () => {
-    if (!store.favorites.books.includes(book.id)) {
-      addBooksFavs(book.id)
-      setInFavorite(true)
+    if (store.favorites?.books.includes(book.id)) {
+      await deleteBookFav(book.id)
+      setInFavorite(false)
       
     } else {
-      deleteBookFav(book.id)
-      setInFavorite(false)
+      await addBooksFavs(book.id)
+      setInFavorite(true)
     }
   }
+  
 
   return (
     <>
@@ -48,7 +49,7 @@ export const CardBooks = ({ book }) => {
                   <i className="fas fa-eye me-1"></i>
                   Ver más
                 </button>
-                <button className={styles.btnFavorite} onClick={()=> handleInFavorite(book.id)}> {inFavorite ? '❤️' : '🤍'} </button>
+                <button className={styles.btnFavorite} onClick={handleInFavorite}> {inFavorite ? '❤️' : '🤍'} </button>
               </div>
             </div>
           </div>

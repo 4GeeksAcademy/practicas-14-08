@@ -28,7 +28,6 @@ export const BooksList = () => {
     favExtract()
   }, []);
 
-  console.log(store.favorites.books);
   
 
   return (

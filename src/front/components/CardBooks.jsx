@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/books.module.css";
-import { createBooksFavs, getBooksFavorites } from "../service/service.api";
+import { addBooksFavs, deleteBookFav } from "../service/service.api";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const CardBooks = ({ book }) => {
 
    const [inFavorite, setInFavorite] = useState(false)
+   const { store } = useGlobalReducer()
 
-   const handleInFavorite = () => {
-    if (store.favorites.books.includes(book.id)) {
+   const handleInFavorite = async () => {
+    if (!store.favorites.books.includes(book.id)) {
+      addBooksFavs(book.id)
       setInFavorite(true)
+      
+    } else {
+      deleteBookFav(book.id)
+      setInFavorite(false)
     }
   }
-
 
   return (
     <>
@@ -26,8 +32,6 @@ export const CardBooks = ({ book }) => {
               />
             ) : null}
           </div>
-
-          {/* Cuerpo de la tarjeta */}
           <div className={styles.bookBody}>
             <h5 className={styles.bookTitle}>{book.title}</h5>
 
@@ -44,7 +48,7 @@ export const CardBooks = ({ book }) => {
                   <i className="fas fa-eye me-1"></i>
                   Ver más
                 </button>
-                <button className={styles.btnFavorite} onClick={()=> createBooksFavs(book.id)}>❤️</button>
+                <button className={styles.btnFavorite} onClick={()=> handleInFavorite(book.id)}> {inFavorite ? '❤️' : '🤍'} </button>
               </div>
             </div>
           </div>
